@@ -238,11 +238,17 @@ if (typeof Object.create !== 'function') {
 				widths.fsMax = this.filmstripSize * (gv.outerWidth(dom.gv_frame) + this.opts.frame_gap);
 				widths.fsFull = this.gvImages.length * (gv.outerWidth(dom.gv_frame) + this.opts.frame_gap);
 				widths.filmstrip = Math.min(widths.fsMax,widths.fsFull);
+				if(this.opts.filmstrip_style !== 'scroll') {
+					heights.filmstrip = (Math.ceil(this.gvImages.length / this.filmstripSize) * (gv.outerHeight(dom.gv_frame) + this.opts.frame_gap)) - this.opts.frame_gap;
+				}
 			} else {
 				this.filmstripSize = Math.floor((gv.outerHeight(dom.gv_panelWrap) - gv.outerHeight(dom.gv_navWrap)) / (gv.outerHeight(dom.gv_frame) + this.opts.frame_gap));
 				heights.fsMax = this.filmstripSize * (gv.outerHeight(dom.gv_frame) + this.opts.frame_gap);
 				heights.fsFull = this.gvImages.length * (gv.outerHeight(dom.gv_frame) + this.opts.frame_gap);
 				heights.filmstrip = Math.min(heights.fsMax,heights.fsFull);
+				if(this.opts.filmstrip_style !== 'scroll') {
+					widths.filmstrip = (Math.ceil(this.gvImages.length / this.filmstripSize) * (gv.outerWidth(dom.gv_frame) + this.opts.frame_gap)) - this.opts.frame_gap;
+				}
 			}
 			dom.gv_filmstripWrap.css({
 				width: widths.filmstrip,
@@ -379,24 +385,30 @@ if (typeof Object.create !== 'function') {
 			
 			// If we are scrolling the filmstrip, and we can't show all frames at once,
 			// make two additional copies of each frame
-			if(this.filmstripOrientation === 'horizontal') {
-				if(this.opts.filmstrip_style === 'scroll' && framesLength > gv.innerWidth(dom.gv_filmstripWrap)) {
-					dom.gv_filmstrip.find('.gv_frame').clone(true).appendTo(dom.gv_filmstrip).clone(true).appendTo(dom.gv_filmstrip);
-					dom.gv_filmstrip.css('width',framesLength * 3);
-					this.scrolling = true;
+			if(this.opts.filmstrip_style === 'scroll') {
+				if(this.filmstripOrientation === 'horizontal') {
+					if(framesLength > gv.innerWidth(dom.gv_filmstripWrap)) {
+						dom.gv_filmstrip.find('.gv_frame').clone(true).appendTo(dom.gv_filmstrip).clone(true).appendTo(dom.gv_filmstrip);
+						dom.gv_filmstrip.css('width',framesLength * 3);
+						this.scrolling = true;
+					} else {
+						dom.gv_filmstrip.css('width',framesLength);
+					}
 				} else {
-					dom.gv_filmstrip.css('width',framesLength);
+					if(framesLength > gv.innerHeight(dom.gv_filmstripWrap)) {
+						dom.gv_filmstrip.find('.gv_frame').clone(true).appendTo(dom.gv_filmstrip).clone(true).appendTo(dom.gv_filmstrip);
+						dom.gv_filmstrip.css('height',framesLength * 3);
+						this.scrolling = true;
+					} else {
+						dom.gv_filmstrip.css('height',framesLength);
+					}
 				}
 			} else {
-				if(this.opts.filmstrip_style === 'scroll' && framesLength > gv.innerHeight(dom.gv_filmstripWrap)) {
-					dom.gv_filmstrip.find('.gv_frame').clone(true).appendTo(dom.gv_filmstrip).clone(true).appendTo(dom.gv_filmstrip);
-					dom.gv_filmstrip.css('height',framesLength * 3);
-					this.scrolling = true;
-				} else {
-					dom.gv_filmstrip.css('height',framesLength);
-				}
+				dom.gv_filmstrip.css({
+					width: parseInt(dom.gv_filmstripWrap.css('width'),10)+this.opts.frame_gap,
+					height: parseInt(dom.gv_filmstripWrap.css('height'),10)+this.opts.frame_gap
+				});
 			}
-			
 			dom.gv_frames = dom.gv_filmstrip.find('.gv_frame');
 			$.each(dom.gv_frames,function(i,frame) {
 				$(frame).data('frameIndex',i);						  
@@ -1034,7 +1046,7 @@ if (typeof Object.create !== 'function') {
 		autoplay: false,				//BOOLEAN - flag to start slideshow on gallery load
 		show_captions: false, 			//BOOLEAN - flag to show or hide frame captions	
 		filmstrip_size: 3, 				//INT - number of frames to show in filmstrip-only gallery
-		filmstrip_style: 'scroll', 		//STRING - type of filmstrip to use (scroll = display one line of frames, scroll filmstrip if necessary, show all = display multiple rows of frames if necessary)
+		filmstrip_style: 'scroll', 		//STRING - type of filmstrip to use (scroll = display one line of frames, scroll filmstrip if necessary, showall = display multiple rows of frames if necessary)
 		filmstrip_position: 'bottom', 	//STRING - position of filmstrip within gallery (bottom, top, left, right)
 		frame_width: 80, 				//INT - width of filmstrip frames (in pixels)
 		frame_height: 40, 				//INT - width of filmstrip frames (in pixels)
