@@ -64,7 +64,7 @@ I will exclude the UL wrapper and only show the HTML necessary for a single pane
 	
 CREATING/USING CUSTOM NAVIGATION THEMES
 ---------------------------------
-GalleryView comes with four themes by default:
+GalleryView comes with two themes by default:
 	- dark
 	- light
 
