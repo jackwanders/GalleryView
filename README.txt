@@ -4,7 +4,7 @@ Author: Jack Anderson
 INSTRUCTIONS FOR USE
 ---------------------------------
 1) Place galleryview-x.x folder somewhere in your website directory structure (you can rename this folder if desired)
-2) Include script tags for the desired version of the script (uncompressed, packed) and for the included jQuery Timers plugin file
+2) Include script tags for the desired version of the script (uncompressed, packed) and for the included jQuery Timers and Easing plugin files
 3) Include a reference to the jquery.galleryview-x.x.css stylesheet in your document
 4) Create an unordered list in your HTML with the content you wish to be displayed in your gallery (see below for more information on markup options
 5) Edit the id of the first rule in jquery.galleryview-3.0.css to match the id given to your unordered list
@@ -21,7 +21,7 @@ INSTRUCTIONS FOR USE
 		frame_height: 90
 	});
 	
-	Refer to the documentation URL listed above (or the uncompressed javascript) to see a full list of options, their effects on the plugin and their default values.
+	Refer to the uncompressed javascript to see a full list of options, their effects on the plugin and their default values.
 	
 
 
@@ -44,13 +44,22 @@ I will exclude the UL wrapper and only show the HTML necessary for a single pane
 	to the left with each transition. Panel and frame dimensions are set via plugin options, as is the location of the filmstrip. It can be set 
 	to appear below, above, or to either side of the panels.
 	
+2) 	Slideshow with custom thumbnails
+		
+		<li>
+			<img src="../gv/path/to/image.jpg" data-frame="../gv/path/to/thumb.jpg" alt="image" />
+		</li>
+	
+	By adding a data-frame attribute with a relative or absolute path to a separate image, GalleryView will use it to populate the thumbnail. This
+	can be helpful when using large panel images and small thumbnails to avoid degradation due to scaling.
+	
 3)	Slideshow with panel overlays
 	
 		<li>
 			<img src="../gv/path/to/image.jpg" alt="image" title="Pretty Picture" data-description="Some more information about the photo" />
 		</li>
 		
-	For this gallery, the contents of the title and longdesc attributes will display on top of the panel image, its position determined by the 
+	For this gallery, the contents of the title and data-description attributes will display on top of the panel image, its position determined by the 
 	'overlay_position' option. The color of the overlays are  set in the included CSS file.
 	
 CREATING/USING CUSTOM NAVIGATION THEMES
@@ -58,11 +67,9 @@ CREATING/USING CUSTOM NAVIGATION THEMES
 GalleryView comes with four themes by default:
 	- dark
 	- light
-	- dark2
-	- light2
 
 The dark themes contain dark navigation buttons and are best used in galleries with light backgrounds. The light themes contain light 
-colored images and are best for galleries with dark backgrounds. The dark2 and light2 themes contain oversized buttons to demonstrate
+colored images and are best for galleries with dark backgrounds. Both themes also contain oversized panel navigation buttons to demonstrate
 GalleryView's ability to use any kind of navigation images you may want to use
 
 To create your own navigation theme, first create the following images:
