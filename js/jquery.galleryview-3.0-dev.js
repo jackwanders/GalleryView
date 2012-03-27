@@ -186,7 +186,6 @@ if (typeof Object.create !== 'function') {
 			
 			// nav
 			if(this.filmstripOrientation === 'vertical' && (this.opts.frame_width + gv.extraWidth(dom.gv_frame)) < (widths.prev + widths.play + widths.next)) {
-				console.log('stacking');
 				dom.gv_navWrap.css({
 					width: Math.max(widths.prev, widths.play, widths.next),
 					height: heights.prev + heights.play + heights.next
@@ -574,7 +573,6 @@ if (typeof Object.create !== 'function') {
 					panel.hide().prependTo(dom.gv_panelWrap).fadeIn(this.opts.transition_speed);
 					break;
 				case 'slide':
-					console.log(frame_i,i,this.iterator);
 					if(this.navAction === 'next' || (this.navAction === 'frame' && frame_i > this.iterator)) {
 						newPanelStart = gv.outerWidth(dom.gv_panel);
 						oldPanelEnd = -1 * gv.outerWidth(dom.gv_panel);
