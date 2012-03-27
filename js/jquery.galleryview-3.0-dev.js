@@ -184,18 +184,7 @@ if (typeof Object.create !== 'function') {
 				},
 				panels = [];
 			
-			// nav
-			if(this.filmstripOrientation === 'vertical' && (this.opts.frame_width + gv.extraWidth(dom.gv_frame)) < (widths.prev + widths.play + widths.next)) {
-				dom.gv_navWrap.css({
-					width: Math.max(widths.prev, widths.play, widths.next),
-					height: heights.prev + heights.play + heights.next
-				});
-			} else {
-				dom.gv_navWrap.css({
-					width: widths.prev + widths.play + widths.next,
-					height: Math.max(heights.prev,heights.play,heights.next)
-				});
-			}
+			
 			
 			// panels
 			dom.gv_panel.css({
@@ -253,6 +242,19 @@ if (typeof Object.create !== 'function') {
 				width: widths.filmstrip,
 				height: heights.filmstrip
 			});
+			
+			// nav
+			if(this.filmstripOrientation === 'vertical' && widths.filmstrip < (widths.prev + widths.play + widths.next)) {
+				dom.gv_navWrap.css({
+					width: Math.max(widths.prev, widths.play, widths.next),
+					height: heights.prev + heights.play + heights.next
+				});
+			} else {
+				dom.gv_navWrap.css({
+					width: widths.prev + widths.play + widths.next,
+					height: Math.max(heights.prev,heights.play,heights.next)
+				});
+			}
 			
 			// gallery
 			if(this.opts.show_filmstrip) {
