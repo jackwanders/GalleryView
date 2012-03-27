@@ -184,7 +184,37 @@ if (typeof Object.create !== 'function') {
 				},
 				panels = [];
 			
+			// nav
+			if(this.filmstripOrientation === 'horizontal') {
+				dom.gv_navWrap.css({
+					width: widths.prev + widths.play + widths.next,
+					height: Math.max(heights.prev,heights.play,heights.next)
+				});
+			} else {
+				if(this.opts.filmstrip_style === 'scroll' && this.opts.frame_width < (widths.prev + widths.play + widths.next)) {
+					dom.gv_navWrap.css({
+						width: Math.max(widths.prev, widths.play, widths.next),
+						height: heights.prev + heights.play + heights.next
+					});
+				} else {
+					dom.gv_navWrap.css({
+						width: widths.prev + widths.play + widths.next,
+						height: Math.max(heights.prev,heights.play,heights.next)
+					});
+				}
+			}
 			
+			if(this.filmstripOrientation === 'vertical' && widths.filmstrip < (widths.prev + widths.play + widths.next)) {
+				dom.gv_navWrap.css({
+					width: Math.max(widths.prev, widths.play, widths.next),
+					height: heights.prev + heights.play + heights.next
+				});
+			} else {
+				dom.gv_navWrap.css({
+					width: widths.prev + widths.play + widths.next,
+					height: Math.max(heights.prev,heights.play,heights.next)
+				});
+			}
 			
 			// panels
 			dom.gv_panel.css({
@@ -242,19 +272,6 @@ if (typeof Object.create !== 'function') {
 				width: widths.filmstrip,
 				height: heights.filmstrip
 			});
-			
-			// nav
-			if(this.filmstripOrientation === 'vertical' && widths.filmstrip < (widths.prev + widths.play + widths.next)) {
-				dom.gv_navWrap.css({
-					width: Math.max(widths.prev, widths.play, widths.next),
-					height: heights.prev + heights.play + heights.next
-				});
-			} else {
-				dom.gv_navWrap.css({
-					width: widths.prev + widths.play + widths.next,
-					height: Math.max(heights.prev,heights.play,heights.next)
-				});
-			}
 			
 			// gallery
 			if(this.opts.show_filmstrip) {
@@ -444,7 +461,6 @@ if (typeof Object.create !== 'function') {
 		initImages: function() {
 			var self = this,
 				dom = this.dom;
-			
 			$.each(this.gvImages,function(i,gvImage) {
 				var img = $('<img/>');
 				img.css('visibility','hidden').data('index',i);
