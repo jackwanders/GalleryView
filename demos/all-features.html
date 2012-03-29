@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>GalleryView - Full Feature Demo</title>
+
+<!-- First, add jQuery (and jQuery UI if using custom easing or animation -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+
+<!-- Second, add the Timer and Easing plugins -->
+<script type="text/javascript" src="../js/jquery.timers-1.2.js"></script>
+<script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
+
+<!-- Third, add the GalleryView Javascript and CSS files -->
+<script type="text/javascript" src="../js/jquery.galleryview-3.0-dev.js"></script>
+<link type="text/css" rel="stylesheet" href="../css/jquery.galleryview-3.0-dev.css" />
+
+<!-- Lastly, call the galleryView() function on your unordered list(s) -->
+<script type="text/javascript">
+	$(function(){
+		$('#myGallery').galleryView({
+		transition_speed: 2000, 		//INT - duration of panel/frame transition (in milliseconds)
+		transition_interval: 4000, 		//INT - delay between panel/frame transitions (in milliseconds)
+		easing: 'swing', 				//STRING - easing method to use for animations (jQuery provides 'swing' or 'linear', more available with jQuery UI or Easing plugin)
+		show_panels: true, 				//BOOLEAN - flag to show or hide panel portion of gallery
+		show_panel_nav: false, 			//BOOLEAN - flag to show or hide panel navigation buttons
+		enable_overlays: true, 			//BOOLEAN - flag to show or hide panel overlays
+		
+		panel_width: 900, 				//INT - width of gallery panel (in pixels)
+		panel_height: 500, 				//INT - height of gallery panel (in pixels)
+		panel_animation: 'slide', 		//STRING - animation method for panel transitions (crossfade,fade,slide,none)
+		panel_scale: 'crop', 			//STRING - cropping option for panel images (crop = scale image and fit to aspect ratio determined by panel_width and panel_height, fit = scale image and preserve original aspect ratio)
+		overlay_position: 'bottom', 	//STRING - position of panel overlay (bottom, top)
+		pan_images: true,				//BOOLEAN - flag to allow user to grab/drag oversized images within gallery
+		pan_style: 'drag',				//STRING - panning method (drag = user clicks and drags image to pan, track = image automatically pans based on mouse position
+		pan_smoothness: 15,				//INT - determines smoothness of tracking pan animation (higher number = smoother)
+		start_frame: 1, 				//INT - index of panel/frame to show first when gallery loads
+		show_filmstrip: true, 			//BOOLEAN - flag to show or hide filmstrip portion of gallery
+		show_filmstrip_nav: true, 		//BOOLEAN - flag indicating whether to display navigation buttons
+		enable_slideshow: false,			//BOOLEAN - flag indicating whether to display slideshow play/pause button
+		autoplay: false,				//BOOLEAN - flag to start slideshow on gallery load
+		show_captions: true, 			//BOOLEAN - flag to show or hide frame captions	
+		filmstrip_size: 3, 				//INT - number of frames to show in filmstrip-only gallery
+		filmstrip_style: 'scroll', 		//STRING - type of filmstrip to use (scroll = display one line of frames, scroll filmstrip if necessary, showall = display multiple rows of frames if necessary)
+		filmstrip_position: 'bottom', 	//STRING - position of filmstrip within gallery (bottom, top, left, right)
+		frame_width: 164, 				//INT - width of filmstrip frames (in pixels)
+		frame_height: 80, 				//INT - width of filmstrip frames (in pixels)
+		frame_opacity: 0.5, 			//FLOAT - transparency of non-active frames (1.0 = opaque, 0.0 = transparent)
+		frame_scale: 'crop', 			//STRING - cropping option for filmstrip images (same as above)
+		frame_gap: 5, 					//INT - spacing between frames within filmstrip (in pixels)
+		show_infobar: true,				//BOOLEAN - flag to show or hide infobar
+		infobar_opacity: 1				//FLOAT - transparency for info bar
+		});
+	});
+</script>
+
+<style type="text/css">
+	body { 
+		margin: 2em; 
+		font-family: Arial, Helvetica, sans-serif;
+	}
+</style>
+</head>
+
+<body>
+	<ul id="myGallery">
+            <li><img data-frame="http://www.spaceforaname.com/galleryview/img/photos/crops/bp1.jpg" src="http://www.spaceforaname.com/galleryview/img/photos/bp1.jpg" title="Lone Tree Yellowstone" data-description="A solitary tree surviving another harsh winter in Yellowstone National Park. Yellowstone National Park, Wyoming. (Photo and caption by Anita Erdmann/Nature/National Geographic Photo Contest) " />
+            <li><img data-frame="http://www.spaceforaname.com/galleryview/img/photos/crops/bp2.jpg" src="http://www.spaceforaname.com/galleryview/img/photos/bp2.jpg" title="Is He Still There?!" data-description="One morning while on the Big Island of Hawaii, i exploring my surroundings to see if i could find something to photograph. I almost went back inside when something on this huge palm tree leaf caught my eye. I stayed around and it was this little gecko, startled by my presence he was hidden between the ridges of the leaf. He would pop his head up periodically to check his surroundings, as soon as he saw i was still there he would hide again. We played this game for a while until i got the shot. Holualoa big Island, Hawaii. (Photo and caption by Lorenzo Menendez/Nature/National Geographic Photo Contest)" />
+            <li><img data-frame="http://www.spaceforaname.com/galleryview/img/photos/crops/bp4.jpg" src="http://www.spaceforaname.com/galleryview/img/photos/bp4.jpg" title="Noni Nectar For Green Gecko" data-description="Madagascar Gold Dust Day Gecko licking nectar from a young noni fruit in Kailua, Hawaii. These geckos were living all around the hale' we were staying in, enjoying the noni and basking on the railing and sunny steps to our place. They were very shy mostly, except this one must have enjoyed the nectar so much as to let me get a shot of their favorite activity. They seemed to tend the noni very attentively throughout the day. August 2010, Chandra S Sherin. Kona Village Resort, Kailua - Kona, Hawaii. (Photo and Caption by Chandra Sherin/Nature/National Geographic Photo Contest)" />
+            <li><img data-frame="http://www.spaceforaname.com/galleryview/img/photos/crops/bp7.jpg" src="http://www.spaceforaname.com/galleryview/img/photos/bp7.jpg" title="Flight of an Eagle Owl" data-description="A large adult eagle owl in flight. Lingfield, Surrey, UK. (Photo and caption by Mark Bridger/Nature/National Geographic Photo Contest)" />
+            <li><img data-frame="http://www.spaceforaname.com/galleryview/img/photos/crops/bp14.jpg" src="http://www.spaceforaname.com/galleryview/img/photos/bp14.jpg" title="Winter Lollipops" data-description="Winter is extremely beautiful in Lithuania. It was an early morning and minus 25 degrees Celsius outside. This landscape feels out of this world, but in fact it's in the outskirts of my home city, Kaunas—just a mile away from my house. Oftentimes beauty lies just a step away from our door. Kaunas, Lithuania (Photo and caption by Matas Juras/Nature/National Geographic Photo Contest)" />
+            <li><img data-frame="http://www.spaceforaname.com/galleryview/img/photos/crops/bp26.jpg" src="http://www.spaceforaname.com/galleryview/img/photos/bp26.jpg" title="Day of Youth" data-description="Muslim girls at the day of the youth on the 11th of February. The girls are walking in a procession to the mayor of the village and are singing about the power of Cameroon. Lagdo, Cameroon. (Photo and caption by Ronnie Dankelman/People/National Geographic Photo Contest)" />
+            <li><img data-frame="http://www.spaceforaname.com/galleryview/img/photos/crops/bp27.jpg" src="http://www.spaceforaname.com/galleryview/img/photos/bp27.jpg" title="Sunbathing Underwater" data-description="The sun gives us energy even underwater. This image was captured during freediving (diving on a single breath without scuba gear) in the Red Sea. Eel Garden, Dahab, Sinai, Egypt. (Photo and caption by Vaclav Krpelik/People/National Geographic Photo Contest)" />
+            <li><img data-frame="http://www.spaceforaname.com/galleryview/img/photos/crops/bp28.jpg" src="http://www.spaceforaname.com/galleryview/img/photos/bp28.jpg" title="Untitled" data-description="Children filled with happiness playing in the water. Brazil. (Photo and caption by Seth Solo/People/National Geographic Photo Contest)" />
+            <li><img data-frame="http://www.spaceforaname.com/galleryview/img/photos/crops/bp41.jpg" src="http://www.spaceforaname.com/galleryview/img/photos/bp41.jpg" title="New Orleans Streetcar" data-description="This is a streetcar in New Orleans traveling back towards The Quarter on St. Charles Ave. I held the camera against the window sill, making sure to divide the image equally between the inside and the outside. New Orleans, Louisiana. (Photo and caption by Don Chamblee/Places/National Geographic Photo Contest)" />
+            <li><img data-frame="http://www.spaceforaname.com/galleryview/img/photos/crops/bp49.jpg" src="http://www.spaceforaname.com/galleryview/img/photos/bp49.jpg" title="By The Wind of Chance" data-description="I was doing my touristic duties to photograph the Pyramids, and I hear my professor shouting. Next thing you know my entire class and some police officers were running to catch my professors hat. It actually wasn't until later that night when scrolling through my photos that I realized I captured this gem. Great Pyramid of Giza. (Photo and caption by John Head/Places/National Geographic Photo Contest)" />
+            <li><img data-frame="http://www.spaceforaname.com/galleryview/img/photos/crops/bp52.jpg" src="http://www.spaceforaname.com/galleryview/img/photos/bp52.jpg" title="Fishing on the Cloud" data-description="Anglers fishing in the mist rising from the reservoir by dawn look like fishing on cloud. Gosam reservoir, Anseong, Gyeonggi-do, Korea. (Photo and caption by Sungjin Kim/Places/National Geographic Photo Contest)" />
+            <li><img data-frame="http://www.spaceforaname.com/galleryview/img/photos/crops/bp53.jpg" src="http://www.spaceforaname.com/galleryview/img/photos/bp53.jpg" title="Blue Lagoon" data-description="Blue lagoon, Iceland. (Photo and caption by Maroesjka Lavigne/Places/National Geographic Photo Contest)" />
+            <li><img data-frame="http://www.spaceforaname.com/galleryview/img/photos/crops/bp54.jpg" src="http://www.spaceforaname.com/galleryview/img/photos/bp54.jpg" title="Time" data-description="An image with beautiful natural colours i was surveying for work when i found this moment and only got the one single shot due to the meeting with my client, the car and the climber was removed one week after the image was taken... UK. (Photo and caption by Simon Belham/Places/National Geographic Photo Contest)" />
+        </ul>
+	<p>Please view the source of this page if you are having difficulties setting up GalleryView.</p>
+</body>
+</html>
