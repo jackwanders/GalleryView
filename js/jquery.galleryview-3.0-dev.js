@@ -629,7 +629,7 @@ if (typeof Object.create !== 'function') {
 				dom = this.dom;
 			
 			if(this.overlayVisible) {
-				this.hideOverlay(function(){
+				this.hideOverlay(null,function(){
 					dom.gv_overlay.html('<h4>'+self.gvImages[i].attrs.title+'</h4><p>'+self.gvImages[i].attrs.description+'</p>');
 					self.showOverlay();
 				});
@@ -640,11 +640,12 @@ if (typeof Object.create !== 'function') {
 			
 		},
 		
-		hideOverlay: function(callback) {
+		hideOverlay: function(s,callback) {
 			var self = this,
 				dom = this.dom,
 				endOverlay = {},
-				endButton = {};
+				endButton = {},
+				speed = s || self.opts.transition_speed / 2;
 				
 			callback = callback || function(){};
 			
@@ -652,24 +653,25 @@ if (typeof Object.create !== 'function') {
 			endButton[this.opts.overlay_position] = 0;
 			
 			dom.gv_overlay.animate(endOverlay,{ 
-				duration: self.opts.transition_speed / 2, 
+				duration: speed, 
 				easing: 'swing', 
 				complete: callback
 			});
 			dom.gv_showOverlay.animate(endButton,{
-				duration: self.opts.transition_speed / 2,
+				duration: speed,
 				easing: 'swing'
 			});
 			
 			this.overlayVisible = false;
 		},
 		
-		showOverlay: function() {
+		showOverlay: function(s) {
 			var self = this,
 				dom = this.dom,
 				startOverlay = {},
 				endOverlay = {},
-				endButton = {};
+				endButton = {},
+				speed = s || self.opts.transition_speed / 2;
 			
 			startOverlay[this.opts.overlay_position] = -1 * dom.gv_overlay.outerHeight();
 			startOverlay.left = 0;
@@ -679,8 +681,8 @@ if (typeof Object.create !== 'function') {
 			endButton[this.opts.overlay_position] = dom.gv_overlay.outerHeight();
 			
 			dom.gv_overlay.css(startOverlay);
-			dom.gv_overlay.animate(endOverlay,{ duration: self.opts.transition_speed / 2, easing: 'swing' });
-			dom.gv_showOverlay.animate(endButton,{ duration: self.opts.transition_speed / 2, easing: 'swing' });
+			dom.gv_overlay.animate(endOverlay,{ duration: speed, easing: 'swing' });
+			dom.gv_showOverlay.animate(endButton,{ duration: speed, easing: 'swing' });
 			
 			this.overlayVisible = true;
 		},
@@ -834,9 +836,9 @@ if (typeof Object.create !== 'function') {
 			
 			dom.gv_showOverlay.bind('click.galleryview',function(){
 				if(self.overlayVisible) {
-					self.hideOverlay();
+					self.hideOverlay(250);
 				} else {
-					self.showOverlay();
+					self.showOverlay(250);
 				}
 			});
 			
@@ -948,13 +950,13 @@ if (typeof Object.create !== 'function') {
 			dom.gv_galleryWrap.hide().append(dom.gv_gallery);
 			
 			if(this.opts.show_panels) {
-				dom.gv_gallery.append(
-					dom.gv_panelWrap.append(
-						dom.gv_panelNavNext,
-						dom.gv_panelNavPrev,
-						dom.gv_infobar
-					)
-				);
+				dom.gv_gallery.append(dom.gv_panelWrap);
+				if(this.opts.show_panel_nav) {
+					dom.gv_panelWrap.append(dom.gv_panelNavNext,dom.gv_panelNavPrev);
+				}
+				if(this.opts.show_infobar) {
+					dom.gv_panelWrap.append(dom.gv_infobar);
+				}
 			}
 			
 			if(this.opts.show_filmstrip) {
@@ -975,7 +977,7 @@ if (typeof Object.create !== 'function') {
 				}
 			}
 			
-			if(this.opts.show_overlays) {
+			if(this.opts.enable_overlays) {
 				dom.gv_panelWrap.append(dom.gv_overlay,dom.gv_showOverlay);	
 			}
 			
@@ -1044,7 +1046,7 @@ if (typeof Object.create !== 'function') {
 		// Panel Options
 		show_panels: true, 				//BOOLEAN - flag to show or hide panel portion of gallery
 		show_panel_nav: true, 			//BOOLEAN - flag to show or hide panel navigation buttons
-		show_overlays: false, 			//BOOLEAN - flag to show or hide panel overlays
+		enable_overlays: false, 			//BOOLEAN - flag to show or hide panel overlays
 		panel_width: 800, 				//INT - width of gallery panel (in pixels)
 		panel_height: 400, 				//INT - height of gallery panel (in pixels)
 		panel_animation: 'fade', 		//STRING - animation method for panel transitions (crossfade,fade,slide,none)
