@@ -621,7 +621,7 @@ if (typeof Object.create !== 'function') {
 			this.updateFilmstrip(frame_i);
 			this.showInfoBar();
 			
-			
+			document.getSelection().removeAllRanges(); // fixes selection of item
 		},
 		
 		updateOverlay: function(i) {
