@@ -621,7 +621,7 @@ if (typeof Object.create !== 'function') {
 			this.updateFilmstrip(frame_i);
 			this.showInfoBar();
 			
-			
+			document.getSelection().removeAllRanges(); // fixes selection of item
 		},
 		
 		updateOverlay: function(i) {
@@ -917,7 +917,7 @@ if (typeof Object.create !== 'function') {
 			this.$el = $(el);
 			this.id = el.id;
 			this.iterator = this.frameIterator = this.opts.start_frame - 1;
-			this.overlayVisible = false;
+			this.overlayVisible = this.opts.show_overlays;
 			this.playing = false;
 			this.scrolling = false;
 			this.isMouseDown = false;
@@ -980,7 +980,7 @@ if (typeof Object.create !== 'function') {
 			if(this.opts.enable_overlays) {
 				dom.gv_panelWrap.append(dom.gv_overlay,dom.gv_showOverlay);	
 			}
-			
+					
 			if(this.opts.show_captions) {
 				dom.gv_frame.append(dom.gv_caption).appendTo(dom.gv_gallery);	
 			}
@@ -1046,7 +1046,8 @@ if (typeof Object.create !== 'function') {
 		// Panel Options
 		show_panels: true, 				//BOOLEAN - flag to show or hide panel portion of gallery
 		show_panel_nav: true, 			//BOOLEAN - flag to show or hide panel navigation buttons
-		enable_overlays: false, 			//BOOLEAN - flag to show or hide panel overlays
+		enable_overlays: false, 		//BOOLEAN - flag to enable or disable panel overlays
+		show_overlays: false,			//BOOLEAN - flag to show or hide panel overlays on page load (if overlays are enabled) 
 		panel_width: 800, 				//INT - width of gallery panel (in pixels)
 		panel_height: 400, 				//INT - height of gallery panel (in pixels)
 		panel_animation: 'fade', 		//STRING - animation method for panel transitions (crossfade,fade,slide,none)
