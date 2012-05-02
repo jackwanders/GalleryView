@@ -69,6 +69,16 @@ I will exclude the UL wrapper and only show the HTML necessary for a single pane
 	```
 
 	For this gallery, the contents of the title and data-description attributes will display on top of the panel image, its position determined by the 'overlay_position' option. The color of the overlays are  set in the included CSS file.
+
+4. Slideshow with images delayed loading
+	```html
+	<li><img data-original="../gv/path/to/image1.jpg" src="../css/grey.gif" alt="image1" /></li>
+	<li><img data-original="../gv/path/to/image2.jpg" src="../css/grey.gif" alt="image2" /></li>
+	<li><img data-original="../gv/path/to/image3.jpg" src="../css/grey.gif" alt="image3" /></li>
+	<li><img data-original="../gv/path/to/image4.jpg" src="../css/grey.gif" alt="image4" /></li>
+	```
+	
+	Put placeholder image into src attribute and store real image url in data-original attribute. The browser won't load the real images until the GalleryView is initialized (that is, when <code>$('#id_of_list').galleryView()</code> is called). This feature is inspired by the [Lazy Load Plugin for jQuery](https://github.com/tuupola/jquery_lazyload) by [Mika Tuupola](http://www.appelsiini.net/projects/lazyload).
 	
 CREATING/USING CUSTOM NAVIGATION THEMES
 ---------------------------------

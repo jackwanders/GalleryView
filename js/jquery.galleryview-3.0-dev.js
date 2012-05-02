@@ -22,8 +22,8 @@ if (typeof Object.create !== 'function') {
 	var gvImage = function (img) {
 
 		this.src = { 
-			panel: img.attr('src'),
-			frame: img.data('frame') || img.attr('src')
+			panel: img.data('original') || img.attr('src'),
+			frame: img.data('frame') || img.data('original') || img.attr('src')
 		};
 		this.scale = {
 			panel: null,
