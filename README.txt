@@ -7,7 +7,7 @@ INSTRUCTIONS FOR USE
 2) Include script tags for the desired version of the script (uncompressed, packed) and for the included jQuery Timers and Easing plugin files
 3) Include a reference to the jquery.galleryview-x.x.css stylesheet in your document
 4) Create an unordered list in your HTML with the content you wish to be displayed in your gallery (see below for more information on markup options
-5) Edit the id of the first rule in jquery.galleryview-3.0.css to match the id given to your unordered list
+5) Add class "galleryView" to the unordered list to make it invisible at firt (in order to prevent a flash of unstyled content).
 6) Call the GalleryView plugin with the function call below:
 
 	$('#id_of_list').galleryView()
@@ -31,7 +31,7 @@ Below, I will show you the markup required to produce various types of galleries
 I will exclude the UL wrapper and only show the HTML necessary for a single panel and/or frame.
 
 1) 	Basic slideshow (no added features)
-		<ul id="gallery">
+		<ul id="gallery" class="galleryView">
 			<li><img src="../gv/path/to/image1.jpg" alt="image1" /></li>
 			<li><img src="../gv/path/to/image2.jpg" alt="image2" /></li>
 			<li><img src="../gv/path/to/image3.jpg" alt="image3" /></li>

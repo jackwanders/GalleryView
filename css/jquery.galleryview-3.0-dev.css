@@ -8,8 +8,7 @@
 */
 
 /* GALLERY LIST */
-/* IMPORTANT - Change '#myGallery' to the ID of your gallery list to prevent a flash of unstyled content */
-#myGallery { display: none; }
+.galleryView { display: none; }
 
 .gv_galleryWrap { position: relative; background: #222; font-size: 10pt; }
 
