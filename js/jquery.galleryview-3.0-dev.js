@@ -568,6 +568,10 @@ if (typeof Object.create !== 'function') {
 					frame_i = dom.gv_panels.length - 1;
 				}
 			}
+
+			if( i == this.iterator ) {
+			  return;
+			}
 			
 			panel = dom.gv_panels.eq(i);
 			
