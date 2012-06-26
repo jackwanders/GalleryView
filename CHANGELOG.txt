@@ -2,7 +2,7 @@
 Author: 		Jack Anderson
 
 Version 3.0 DEV 2 - 2012-06-26
-Change author: 
+Change author: Joel Etherton
 ----------------------------------------
 Added image linking directly for the panel. Added 2 options to support this linking (described below).
 The panel itself becomes a clickable link which can redirect to any url specified in the data-href attribute
