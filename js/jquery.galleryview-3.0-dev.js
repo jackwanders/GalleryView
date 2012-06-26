@@ -35,7 +35,7 @@ if (typeof Object.create !== 'function') {
 			title: img.attr('title') || img.attr('alt'),
 			description: img.data('description')
 		};
-		this.href = null;
+		this.href = img.data('href');  // Important for clickable links
 		this.dom_obj = null;
 		
 		return this;
@@ -908,6 +908,34 @@ if (typeof Object.create !== 'function') {
 			dom.gv_panelNavPrev.hide();	
 		},
 		
+	        // Added to provide clickable link support for panels
+        	updateClickable: function(i) {
+			var self = this,
+				dom = this.dom;
+
+                	href = self.gvImages[i].href;
+
+                	if(href != '')
+                	{
+                    	var action;
+	
+                    	if (this.opts.link_newwindow){
+	                        action = function(){
+                            	window.open(href, "_blank");
+                        	};
+                    	}
+                    	else {
+	                        action = function(){
+                            	window.location = href;
+                        	};    
+                    	}                         
+                                  	
+                    	dom.gv_panelWrap.delegate('.gv_panel','click.galleryview', action);
+                	}
+	
+                	return false;
+		},
+		
 		init: function(options,el) {
 			var self = this,
 				dom = this.dom = {};
@@ -1014,6 +1042,11 @@ if (typeof Object.create !== 'function') {
 				this.startSlideshow(true);
 			}
 			
+			// if panels should be clickable - set it up
+                        if(this.opts.panel_clickable){
+                                this.updateClickable(this.iterator);
+                        }
+			
 			this.updateOverlay(this.iterator);
 			this.updateFilmstrip(this.frameIterator);
 		}
@@ -1055,7 +1088,9 @@ if (typeof Object.create !== 'function') {
 		pan_images: false,				//BOOLEAN - flag to allow user to grab/drag oversized images within gallery
 		pan_style: 'drag',				//STRING - panning method (drag = user clicks and drags image to pan, track = image automatically pans based on mouse position
 		pan_smoothness: 15,				//INT - determines smoothness of tracking pan animation (higher number = smoother)
-		
+                link_newwindow: true,           //BOOLEAN - flag to open clickable images in a new window
+                panel_clickable: false,         //BOOLEAN - flag to determine if the panel is clickable
+        
 		// Filmstrip Options
 		start_frame: 1, 				//INT - index of panel/frame to show first when gallery loads
 		show_filmstrip: true, 			//BOOLEAN - flag to show or hide filmstrip portion of gallery
