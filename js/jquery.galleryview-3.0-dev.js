@@ -616,6 +616,7 @@ if (typeof Object.create !== 'function') {
 			}
 			
 			this.updateOverlay(i);
+		        this.updateClickable(i);
 			
 			this.iterator = i;
 			this.updateFilmstrip(frame_i);
