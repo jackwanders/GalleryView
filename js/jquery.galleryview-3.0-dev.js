@@ -930,7 +930,11 @@ if (typeof Object.create !== 'function') {
                             	window.location = href;
                         	};    
                     	}                         
-                                  	
+                                  
+			// If we don't undelegate here, we'll stack
+			// up click actions and cycling through the
+			// gallery can end up opening LOTS of links
+			dom.gv_panelWrap.undelegate('.gv_panel', 'click.galleryview');
                     	dom.gv_panelWrap.delegate('.gv_panel','click.galleryview', action);
                 	}
 	
