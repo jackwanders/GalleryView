@@ -4,6 +4,25 @@ Author: 		Jack Anderson
 Version 3.0 DEV 2 - 2012-06-26
 Change author: Joel Etherton
 ----------------------------------------
+Added a new option to allow for the primary panel image to display in a random order while the "slideshow" is playing.
+Also modified the showNext method to perform the randomness while the playing flag is set.
+
+New option:
+	 - play_random_order
+		- BOOLEAN: flag to indicate that the slideshow should be random
+
+Usage-script:
+
+        $(function () {
+            $('#myGallery').galleryView({
+                play_random_order: true
+            });
+        });
+
+
+Version 3.0 DEV 2 - 2012-06-26
+Change author: Joel Etherton
+----------------------------------------
 Added image linking directly for the panel. Added 2 options to support this linking (described below).
 The panel itself becomes a clickable link which can redirect to any url specified in the data-href attribute
 of the original image html.
