@@ -1,6 +1,23 @@
 ﻿GalleryView - jQuery Content Gallery Plugin
 Author: 		Jack Anderson
 
+Version 3.0 DEV 2 - 2012-07-10
+Change author: Joel Etherton
+----------------------------------------
+Removed option "panel_clickable". Added option "clickable" as a string to specify which items respond to the item link.
+
+New options:
+	- clickable
+		- STRING: specifies which element responds to the item link. Valid options: all|panel|overlay|none
+
+Usage-script:
+
+        $(function () {
+            $('#myGallery').galleryView({
+                clickable: 'all'
+            });
+        });
+
 Version 3.0 DEV 2 - 2012-06-26
 Change author: Joel Etherton
 ----------------------------------------
