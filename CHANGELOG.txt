@@ -1,6 +1,71 @@
 ﻿GalleryView - jQuery Content Gallery Plugin
 Author: 		Jack Anderson
 
+Version 3.0 DEV 2 - 2012-07-10
+Change author: Joel Etherton
+----------------------------------------
+Removed option "panel_clickable". Added option "clickable" as a string to specify which items respond to the item link.
+
+New options:
+	- clickable
+		- STRING: specifies which element responds to the item link. Valid options: all|panel|overlay|none
+
+Usage-script:
+
+        $(function () {
+            $('#myGallery').galleryView({
+                clickable: 'all'
+            });
+        });
+
+Version 3.0 DEV 2 - 2012-06-26
+Change author: Joel Etherton
+----------------------------------------
+Added a new option to allow for the primary panel image to display in a random order while the "slideshow" is playing.
+Also modified the showNext method to perform the randomness while the playing flag is set.
+
+New option:
+	 - play_random_order
+		- BOOLEAN: flag to indicate that the slideshow should be random
+
+Usage-script:
+
+        $(function () {
+            $('#myGallery').galleryView({
+                play_random_order: true
+            });
+        });
+
+
+Version 3.0 DEV 2 - 2012-06-26
+Change author: Joel Etherton
+----------------------------------------
+Added image linking directly for the panel. Added 2 options to support this linking (described below).
+The panel itself becomes a clickable link which can redirect to any url specified in the data-href attribute
+of the original image html.
+
+New options:
+	- panel_clickable
+		- BOOLEAN: flag to indicate that the panel should have a clickable link
+	- link_newwindow
+		- BOOLEAN: flag to indicate that panel links should/should not open in a new window
+
+Usage-script:
+
+        $(function () {
+            $('#myGallery').galleryView({
+                panel_clickable: true,
+                link_newwindow: false
+            });
+        });
+
+Usage-html:
+
+        <li><img src="myImage.jpg" data-href="http://www.google.com/" />
+
+There are many more options that probably should be available, but this provides baseline functionality.
+
+
 Version 3.0 DEV - 2012-03-21
 ----------------------------------------
 
