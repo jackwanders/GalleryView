@@ -566,16 +566,7 @@ if (typeof Object.create !== 'function') {
 				playing = false;
 
 	        // don't go out of bounds
-	        if (i >= this.numImages) {
-	            i = i % this.numImages;
-	        } else if (i < 0) {
-	            i = this.numImages - 1;
-	            if (dom.gv_frames != undefined) {
-	                frame_i = dom.gv_frames.length - 1;
-	            } else {
-	                frame_i = dom.gv_panels.length - 1;
-	            }
-	        }
+            i = self.getTrueImageIndex(i);
 
 	        panel = dom.gv_panels.eq(i);
 
@@ -629,9 +620,26 @@ if (typeof Object.create !== 'function') {
 	        this.iterator = i;
 	        this.updateFilmstrip(frame_i);
 	        this.showInfoBar();
-
-
 	    },
+
+        // given an index i, it will adjust i to an appropriate
+        // index that is within the bounds of the images array
+        // pulled out of showItem so it could be re-used for 
+        // other methods and events
+        getTrueImageIndex: function (i) {
+            if (i >= this.numImages) {
+	            i = i % this.numImages;
+	        } else if (i < 0) {
+	            i = this.numImages - 1;
+	            if (dom.gv_frames != undefined) {
+	                frame_i = dom.gv_frames.length - 1;
+	            } else {
+	                frame_i = dom.gv_panels.length - 1;
+	            }
+	        }
+
+            return i;
+        },
 
 	    updateOverlay: function (i) {
 	        var self = this,
@@ -890,10 +898,18 @@ if (typeof Object.create !== 'function') {
 
 	        dom.gv_filmstripWrap.delegate('.gv_frame', 'click.galleryview', function () {
 	            var el = $(this),
-					i = el.data('frameIndex');
+					i = self.getTrueImageIndex(el.data('frameIndex'));
 
-	            this.navAction = 'frame';
-	            self.showItem(i);
+				if (self.opts.filmstrip_use_alt_click && self.gvImages[i].href != "")
+				{
+                    self.doClick(self.gvImages[i].href)();	
+				}
+				else
+				{
+		            this.navAction = 'frame';
+		            self.showItem(i);
+				}
+				
 	            return false;
 	        });
 
@@ -1143,6 +1159,7 @@ if (typeof Object.create !== 'function') {
         frame_opacity: 0.4, 			//FLOAT - transparency of non-active frames (1.0 = opaque, 0.0 = transparent)
         frame_scale: 'crop', 			//STRING - cropping option for filmstrip images (same as above)
         frame_gap: 5, 					//INT - spacing between frames within filmstrip (in pixels)
+		filmstrip_use_alt_click: false, //BOOLEAN - allows the filmstrip to use the alternate clickable option as instead of navigating as normal
 
         // Info Bar Options
         show_infobar: true, 			//BOOLEAN - flag to show or hide infobar
