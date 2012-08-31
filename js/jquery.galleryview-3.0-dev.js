@@ -869,6 +869,11 @@ if (typeof Object.create !== 'function') {
 				var el = $(this),
 					i = el.data('frameIndex');
 				
+				//if el is '.current' frame, just return.
+				if(el.children(".gv_thumbnail").hasClass("current")){
+                    return false;
+                }
+                                
 				this.navAction = 'frame';
 				self.showItem(i);
 				return false;
