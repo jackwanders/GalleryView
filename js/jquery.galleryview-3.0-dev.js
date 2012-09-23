@@ -185,6 +185,11 @@ if (typeof Object.create !== 'function') {
 				panels = [];
 			
 			// nav
+			if(!this.opts.show_filmstrip_nav){
+				widths.prev=0;
+				widths.next=0;
+				widths.play=0;
+			}
 			if(this.filmstripOrientation === 'horizontal') {
 				dom.gv_navWrap.css({
 					width: widths.prev + widths.play + widths.next,
