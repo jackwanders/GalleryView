@@ -17,7 +17,16 @@ if (typeof Object.create !== 'function') {
     };
 }
 
-(function ($) {
+// Uses AMD or browser globals to create a jQuery plugin.
+(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['jquery'], factory);
+    } else {
+        // Browser globals
+        factory(jQuery);
+    }
+}(function ($) {
 	// custom image object
 	var gvImage = function (img) {
 
@@ -1076,4 +1085,4 @@ if (typeof Object.create !== 'function') {
 		show_infobar: true,				//BOOLEAN - flag to show or hide infobar
 		infobar_opacity: 1				//FLOAT - transparency for info bar
 	};
-})(jQuery);
+}));
