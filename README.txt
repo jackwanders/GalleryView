@@ -56,10 +56,10 @@ I will exclude the UL wrapper and only show the HTML necessary for a single pane
 3)	Slideshow with panel overlays
 	
 		<li>
-			<img src="../gv/path/to/image.jpg" alt="image" title="Pretty Picture" data-description="Some more information about the photo" />
+			<img src="../gv/path/to/image.jpg" alt="image" title="Pretty Picture" description="Some more information about the photo" />
 		</li>
 		
-	For this gallery, the contents of the title and data-description attributes will display on top of the panel image, its position determined by the 
+	For this gallery, the contents of the title and description attributes will display on top of the panel image, its position determined by the 
 	'overlay_position' option. The color of the overlays are  set in the included CSS file.
 	
 CREATING/USING CUSTOM NAVIGATION THEMES
