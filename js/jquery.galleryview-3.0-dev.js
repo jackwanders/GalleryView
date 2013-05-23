@@ -618,6 +618,7 @@ if (typeof Object.create !== 'function') {
 			
 			this.updateOverlay(i);
 			
+			
 			this.iterator = i;
 			this.updateFilmstrip(frame_i);
 			this.showInfoBar();
@@ -632,11 +633,24 @@ if (typeof Object.create !== 'function') {
 			if(this.overlayVisible) {
 				this.hideOverlay(null,function(){
 					dom.gv_overlay.html('<h4>'+self.gvImages[i].attrs.title+'</h4><p>'+self.gvImages[i].attrs.description+'</p>');
-					self.showOverlay();
+					if (self.opts.overlay_visible == true) self.showOverlay(); 
 				});
 			} else {
 				dom.gv_overlay.html('<h4>'+self.gvImages[i].attrs.title+'</h4><p>'+self.gvImages[i].attrs.description+'</p>');
 				dom.gv_overlay.css(this.opts.overlay_position,-1 * dom.gv_overlay.outerHeight());
+			}
+			
+			if (this.opts.overlay_visible == "auto") {
+				if (
+					self.gvImages[i].attrs.description.replace(/^\s+|\s+$/g, '') != '' &&
+					self.gvImages[i].attrs.title.replace(/^\s+|\s+$/g, '') != '' 
+					)
+					this.showOverlay()
+				else
+					this.hideOverlay()
+					
+			} else if (this.opts.overlay_visible) {
+				this.showOverlay()
 			}
 			
 		},
@@ -1021,9 +1035,6 @@ if (typeof Object.create !== 'function') {
 			}
 			
 			this.updateOverlay(this.iterator);
-			
-			if (this.opts.overlay_visible)
-				this.showOverlay()
 			
 			this.updateFilmstrip(this.frameIterator);
 		}
