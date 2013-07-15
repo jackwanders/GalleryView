@@ -67,7 +67,11 @@
 /**   FILMSTRIP STYLES							**/
 /*************************************************/
 
-.gv_filmstripWrap { overflow: hidden; position: absolute; }
+.gv_filmstripWrap { 
+	overflow: hidden; 
+	position: absolute;
+	z-index: 2; 
+}
 
 
 /* FILMSTRIP */
