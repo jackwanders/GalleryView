@@ -626,24 +626,11 @@ if (typeof Object.create !== 'function') {
 			
 		},
 		
-		updateOverlay: function(i) {
-			var self = this,
-				dom = this.dom;
-			
-			if(this.overlayVisible) {
-				this.hideOverlay(null,function(){
-					dom.gv_overlay.html('<h4>'+self.gvImages[i].attrs.title+'</h4><p>'+self.gvImages[i].attrs.description+'</p>');
-					if (self.opts.overlay_visible == true) self.showOverlay(); 
-				});
-			} else {
-				dom.gv_overlay.html('<h4>'+self.gvImages[i].attrs.title+'</h4><p>'+self.gvImages[i].attrs.description+'</p>');
-				dom.gv_overlay.css(this.opts.overlay_position,-1 * dom.gv_overlay.outerHeight());
-			}
-			
+		autoShowOverlay: function(i) {
 			if (this.opts.overlay_visible == "auto") {
 				if (
-					self.gvImages[i].attrs.description.replace(/^\s+|\s+$/g, '') != '' &&
-					self.gvImages[i].attrs.title.replace(/^\s+|\s+$/g, '') != '' 
+					this.gvImages[i].attrs.description.replace(/^\s+|\s+$/g, '') != '' &&
+					this.gvImages[i].attrs.title.replace(/^\s+|\s+$/g, '') != '' 
 					)
 					this.showOverlay()
 				else
@@ -651,6 +638,23 @@ if (typeof Object.create !== 'function') {
 					
 			} else if (this.opts.overlay_visible) {
 				this.showOverlay()
+			}
+		},
+		
+		updateOverlay: function(i) {
+			var self = this,
+				dom = this.dom;
+			
+			if(this.overlayVisible) {
+				this.hideOverlay(null,function(){
+					dom.gv_overlay.html('<h4>'+self.gvImages[i].attrs.title+'</h4><p>'+self.gvImages[i].attrs.description+'</p>');
+					if (self.opts.overlay_visible == true) self.showOverlay();
+					self.autoShowOverlay(i);
+				});
+			} else {
+				dom.gv_overlay.html('<h4>'+self.gvImages[i].attrs.title+'</h4><p>'+self.gvImages[i].attrs.description+'</p>');
+				dom.gv_overlay.css(self.opts.overlay_position,-1 * dom.gv_overlay.outerHeight());
+				self.autoShowOverlay(i);
 			}
 			
 		},
