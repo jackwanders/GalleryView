@@ -976,6 +976,20 @@ if (typeof Object.create !== 'function') {
 					);
 				}
 			}
+                        else if (this.opts.show_filmstrip_nav) {
+                          dom.gv_gallery.append(
+                            dom.gv_navWrap.append(
+                              dom.gv_navPrev,
+                              (this.opts.enable_slideshow?dom.gv_navPlay:$('<span></span>')),
+                              dom.gv_navNext
+                            )
+                          );
+                          dom.gv_navWrap.css(
+                            {
+                              zIndex: '99999'
+                            }
+                          );
+                        }
 			
 			if(this.opts.enable_overlays) {
 				dom.gv_panelWrap.append(dom.gv_overlay,dom.gv_showOverlay);	
