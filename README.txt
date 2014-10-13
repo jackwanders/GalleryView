@@ -1,4 +1,4 @@
-GalleryView - jQuery Photo Gallery Plugin
+GalleryView - A jQuery Photo Gallery Plugin
 Author: Jack Anderson
 
 INSTRUCTIONS FOR USE
